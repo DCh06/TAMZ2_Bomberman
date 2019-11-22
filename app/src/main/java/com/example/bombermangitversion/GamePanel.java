@@ -2,6 +2,10 @@ package com.example.bombermangitversion;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -9,10 +13,17 @@ import android.view.SurfaceView;
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
 
+    //objects
+    private Point playerCoords;
+    private ObjBomberMan bomberMan;
+
     public GamePanel(Context context){
         super(context);
         getHolder().addCallback(this);
         thread = new MainThread(getHolder(), this);
+        bomberMan = new ObjBomberMan(new Rect(100,100,200,200), Color.rgb(255,0,0));
+        playerCoords = new Point(150,150);
+
         setFocusable(true);
     }
 
@@ -32,7 +43,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         boolean retry = true;
-        while(true) {
+        while(retry) {
             try {
                 thread.setRunning(false);
                 thread.join();
@@ -45,14 +56,27 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        return super.onTouchEvent(event);
+        switch(event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_MOVE:
+                playerCoords.set((int)event.getX(), (int)event.getY());
+                Log.d("playerCoords", (int)event.getX() +" "+(int)event.getY());
+        }
+
+        return true;
+        //return super.onTouchEvent(event);
     }
 
     public void update() {
+
+        bomberMan.update(playerCoords);
     }
 
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
+        canvas.drawColor(Color.WHITE);
+
+        bomberMan.draw(canvas);
     }
 }
