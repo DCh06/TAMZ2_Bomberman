@@ -16,13 +16,18 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     //objects
     private Point playerCoords;
     private ObjBomberMan bomberMan;
+    private EnemyManager enemyManager;
+
 
     public GamePanel(Context context){
         super(context);
         getHolder().addCallback(this);
         thread = new MainThread(getHolder(), this);
+
         bomberMan = new ObjBomberMan(new Rect(100,100,200,200), Color.rgb(255,0,0));
         playerCoords = new Point(150,150);
+
+        enemyManager = new EnemyManager(200, 350, 75, Color.BLACK);
 
         setFocusable(true);
     }
@@ -70,6 +75,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public void update() {
 
         bomberMan.update(playerCoords);
+        enemyManager.update();
     }
 
     @Override
@@ -78,5 +84,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawColor(Color.WHITE);
 
         bomberMan.draw(canvas);
+        enemyManager.draw(canvas);
     }
 }
