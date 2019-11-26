@@ -28,10 +28,8 @@ public class ObjEnemy implements GameObject {
     }
 
     public boolean playerCollide(ObjBomberMan bomberMan){
-        if(this.rectangle.intersect(bomberMan.getRectangle())){
-            return true;
-        }
-        return false;
+
+        return this.rectangle.intersect(bomberMan.getRectangle()) || this.rectangle2.intersect(bomberMan.getRectangle());
     }
 
     @Override
