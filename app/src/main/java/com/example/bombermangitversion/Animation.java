@@ -44,11 +44,12 @@ public class Animation {
         if(!isPlaying)
             return;
         int srcX = frameIndex * width;
-        int srcY = height;
+        int srcY = height * row;
 
         Rect source = new Rect(srcX, srcY, srcX + width, srcY + height);
         canvas.drawBitmap(spriteSheet, source, destination, null);
     }
+
 
     public void update(){
         if(!isPlaying)
