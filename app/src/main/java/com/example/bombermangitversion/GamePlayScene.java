@@ -19,11 +19,13 @@ public class GamePlayScene implements Scene {
     //private EnemyManager enemyManager;
     private IronWallManager ironWallManager;
     private BrickWallManager brickWallManager;
+    private NepritelManager nepritelManager;
     private boolean test = false;
     private Point lastPosition;
     private int direction = 0;
     private int x;
     private int y;
+
     /*private Bomb bomb;
     private BrickWalls brickWalls;*/
 
@@ -38,6 +40,7 @@ public class GamePlayScene implements Scene {
         bomberMan.update();
         ironWallManager = new IronWallManager(Color.BLACK);
         brickWallManager = new BrickWallManager(Color.RED);
+        nepritelManager = new NepritelManager(Color.MAGENTA);
 
         //enemyManager = new EnemyManager(200, 350, 75, Color.BLACK);
     }
@@ -81,7 +84,12 @@ public class GamePlayScene implements Scene {
 
                 bomberMan.stop();
             }
+
+            brickWallManager.enemyCollide(nepritelManager.getNepratele());
+            ironWallManager.enemyCollide(nepritelManager.getNepratele());
+            nepritelManager.update();
             bomberMan.update();
+
            // bomberMan.stop();
         }
     }
@@ -94,6 +102,7 @@ public class GamePlayScene implements Scene {
         //enemyManager.draw(canvas);
         ironWallManager.draw(canvas);
         brickWallManager.draw(canvas);
+        nepritelManager.draw(canvas);
 
         if (gameOver) {
             Paint p = new Paint();
@@ -137,7 +146,6 @@ public class GamePlayScene implements Scene {
                     //if()
                 break;
             case MotionEvent.ACTION_MOVE:
-                    Log.d("MOVE", "MOVE");
 
                 break;
             case MotionEvent.ACTION_UP:

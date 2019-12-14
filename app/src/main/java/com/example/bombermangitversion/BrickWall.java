@@ -4,17 +4,20 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.util.Log;
+
+import java.util.ArrayList;
 
 public class BrickWall implements GameObject {
 
     private Rect rectangle;
     private int color;
+    public boolean visible;
 
 
     public BrickWall(int rectHeight, int rectWidth, int startX, int startY){
         this.color = Color.RED;
         rectangle = new Rect(startX, startY, startX + rectWidth, startY + rectHeight);
+        visible = true;
     }
 
 
@@ -25,6 +28,11 @@ public class BrickWall implements GameObject {
     public boolean playerCollide(ObjBomberMan bomberMan){
         Rect copy = new Rect(this.rectangle);
         return copy.intersect(bomberMan.getRectangle());
+    }
+
+    public boolean enemyCollide(Nepritel nepritel){
+        Rect copy = new Rect(this.rectangle);
+        return copy.intersect(nepritel.getRectangle());
     }
 
     @Override

@@ -4,7 +4,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.util.Log;
 
 public class IronWall implements GameObject {
 
@@ -26,6 +25,13 @@ public class IronWall implements GameObject {
         Rect copy = new Rect(this.rectangle);
         return copy.intersect(bomberMan.getRectangle());
     }
+
+    public boolean enemyCollide(Nepritel nepritel){
+        Rect copy = new Rect(this.rectangle);
+        return copy.intersect(nepritel.getRectangle());
+    }
+
+
 
     @Override
     public void draw(Canvas canvas) {

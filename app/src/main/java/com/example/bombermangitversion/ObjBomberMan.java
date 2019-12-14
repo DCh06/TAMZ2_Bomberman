@@ -112,7 +112,6 @@ public class ObjBomberMan implements GameObject {
 
         int dt = (int)(speed * elapsedTime);
         point.set( currentPosition.x + moveVector.x * dt,  currentPosition.y + moveVector.y * dt);
-        Log.d("DT", String.valueOf(dt));
         currentPosition = point;
 
         rectangle.set(point.x - rectangle.width()/2, point.y - rectangle.height()/2, point.x + rectangle.width()/2, point.y + rectangle.height()/2 );

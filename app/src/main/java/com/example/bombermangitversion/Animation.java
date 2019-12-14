@@ -35,7 +35,7 @@ public class Animation {
 
         frameIndex =  0;
 
-        frameTime = animTime/3;//number of frames
+        frameTime = animTime/8;
         lastFrame = System.currentTimeMillis();
     }
 

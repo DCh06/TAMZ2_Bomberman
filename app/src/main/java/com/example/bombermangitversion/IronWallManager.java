@@ -29,6 +29,14 @@ public class IronWallManager {
         return false;
     }
 
+    public void enemyCollide(ArrayList<Nepritel> nepratele){
+        for(IronWall iw : ironWalls){
+            for(Nepritel ne : nepratele)
+                if(iw.enemyCollide(ne)){
+                    ne.changeDirection();
+                }
+        }
+    }
     private void generateWalls() {
        /* for(int i = 0; i < 14; i++ ) {
             ironWalls.add(new IronWall(Constants.SCREEN_HEIGHT / 14, Constants.SCREEN_WIDTH/10, 0, i * Constants.SCREEN_HEIGHT / 15 ));

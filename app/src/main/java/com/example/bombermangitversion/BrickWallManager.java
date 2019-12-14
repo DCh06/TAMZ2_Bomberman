@@ -1,7 +1,6 @@
 package com.example.bombermangitversion;
 
 import android.graphics.Canvas;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -45,6 +44,15 @@ public class BrickWallManager {
         return false;
     }
 
+   public void enemyCollide(ArrayList<Nepritel> nepratele){
+        for(BrickWall bw : brickWalls){
+            for(Nepritel ne : nepratele)
+                if(bw.enemyCollide(ne)){
+                    ne.changeDirection();
+                }
+        }
+    }
+
     private void generateWalls() {
         for(int i = 0; i < 15; i++ ){
             for(int j = 0; j < 9; j++)
@@ -59,7 +67,10 @@ public class BrickWallManager {
     }
     public void draw(Canvas canvas){
         for(BrickWall bw : brickWalls){
-            bw.draw(canvas);
+            if(bw.visible)
+                bw.draw(canvas);
+            else
+                brickWalls.remove(bw);
         }
     }
 
