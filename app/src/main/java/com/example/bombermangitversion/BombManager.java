@@ -1,6 +1,7 @@
 package com.example.bombermangitversion;
 
 import android.graphics.Canvas;
+import android.graphics.Point;
 
 import java.util.ArrayList;
 
@@ -10,6 +11,8 @@ public class BombManager {
     private int maximum;
     private long startTime;
     private boolean exploded;
+    private int x;
+    private int y;
 
     public BombManager(){
         maximum = 1;
@@ -28,6 +31,9 @@ public class BombManager {
     public void setExploded(){
         exploded = false;
     }
+    public boolean getExploded(){
+        return this.exploded;
+    }
 
     public void enemyCollide(ArrayList<Nepritel> nepratele) {
         for (ObjBomb bomb : bombs) {
@@ -38,16 +44,21 @@ public class BombManager {
             }
         }
     }
+    public Point getBombCoords(){
+        return new Point(x,y);
+    }
 
     public void createBomb(int x, int y) {
-        if(bombs.size() <= maximum){
-            bombs.add(new ObjBomb((Constants.SCREEN_HEIGHT / 16), (Constants.SCREEN_WIDTH/10), x, y + 20));
+        if(bombs.size() <= maximum && !exploded){
+            this.x = x;
+            this.y = y;
+            bombs.add(new ObjBomb((Constants.SCREEN_HEIGHT / 16), (Constants.SCREEN_WIDTH/10), x, y));
             startTime = System.currentTimeMillis();
         }
     }
 
     public void update(){
-        if(System.currentTimeMillis() - startTime > 3000){
+        if(System.currentTimeMillis() - startTime > 3000 && bombs.size() > 0){
            /* bombs.get(0).visible = false;*/
             for(ObjBomb bb : bombs){
 

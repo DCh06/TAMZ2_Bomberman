@@ -3,6 +3,7 @@ package com.example.bombermangitversion;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Rect;
 
 public class ObjBomb implements GameObject{
@@ -11,6 +12,8 @@ public class ObjBomb implements GameObject{
     private int color;
     public boolean visible;
     public boolean justPlanted;
+    private Point bomblocation;
+
 
 
     public ObjBomb(int rectHeight, int rectWidth, int startX, int startY){
@@ -18,11 +21,16 @@ public class ObjBomb implements GameObject{
         rectangle = new Rect(startX, startY, startX + rectWidth, startY + rectHeight);
         visible = true;
         justPlanted = true;
+        bomblocation= new Point(startX, startY);
     }
 
 
     public Rect getRectangle(){
         return rectangle;
+    }
+
+    public Point getBomblocation() {
+        return bomblocation;
     }
 
     public boolean playerCollide(ObjBomberMan bomberMan){
@@ -42,9 +50,6 @@ public class ObjBomb implements GameObject{
         return copy.intersect(nepritel.getRectangle());
     }
 
-    public void tick(){
-
-    }
 
     @Override
     public void draw(Canvas canvas) {

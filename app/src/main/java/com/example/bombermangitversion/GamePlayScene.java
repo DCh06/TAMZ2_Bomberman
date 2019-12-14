@@ -20,6 +20,7 @@ public class GamePlayScene implements Scene {
     private IronWallManager ironWallManager;
     private BrickWallManager brickWallManager;
     private NepritelManager nepritelManager;
+    private ExplosionManager explosionManager;
     private BombManager bombManager;
     private boolean test = false;
     private Point lastPosition;
@@ -42,6 +43,7 @@ public class GamePlayScene implements Scene {
         ironWallManager = new IronWallManager(Color.BLACK);
         brickWallManager = new BrickWallManager(Color.RED);
         nepritelManager = new NepritelManager(Color.MAGENTA);
+        explosionManager = new ExplosionManager();
         bombManager = new BombManager();
 
 
@@ -86,11 +88,17 @@ public class GamePlayScene implements Scene {
                 bomberMan.stop();
             }
 
+            if(bombManager.getExploded()){
+                explosionManager.createExplosion(bombManager.getBombCoords().x,bombManager.getBombCoords().y);
+                bombManager.setExploded();
+            }
+
             brickWallManager.enemyCollide(nepritelManager.getNepratele());
             ironWallManager.enemyCollide(nepritelManager.getNepratele());
             bombManager.enemyCollide(nepritelManager.getNepratele());
-
+            explosionManager.enemyCollide(nepritelManager.getNepratele());
             bombManager.update();
+            explosionManager.update();
             nepritelManager.update();
             bomberMan.update();
 
@@ -108,6 +116,8 @@ public class GamePlayScene implements Scene {
         brickWallManager.draw(canvas);
         nepritelManager.draw(canvas);
         bombManager.draw(canvas);
+        explosionManager.draw(canvas);
+
 
         if (gameOver) {
             Paint p = new Paint();
@@ -152,10 +162,7 @@ public class GamePlayScene implements Scene {
                 break;
             case MotionEvent.ACTION_MOVE:
                 bombManager.createBomb(Math.round(bomberMan.getCurrentPosition().x/(Constants.SCREEN_WIDTH/9))*(Constants.SCREEN_WIDTH/9),
-                        Math.round(bomberMan.getCurrentPosition().y/(Constants.SCREEN_HEIGHT/ 16))*(Constants.SCREEN_HEIGHT/16));
-                Log.d("created bomb at ", ""+ Math.round((float)bomberMan.getCurrentPosition().x/(float)Constants.SCREEN_WIDTH)*Constants.SCREEN_WIDTH+ " "+
-                        Math.round(bomberMan.getCurrentPosition().y/Constants.SCREEN_HEIGHT )*Constants.SCREEN_HEIGHT);
-                Log.d("bombermanx", ""+Math.round(bomberMan.getCurrentPosition().x/(Constants.SCREEN_WIDTH/9))*(Constants.SCREEN_WIDTH/8));
+                        Math.round(bomberMan.getCurrentPosition().y/(Constants.SCREEN_HEIGHT/ 15))*(Constants.SCREEN_HEIGHT/15));
                 break;
             case MotionEvent.ACTION_UP:
                 bomberMan.stop();
