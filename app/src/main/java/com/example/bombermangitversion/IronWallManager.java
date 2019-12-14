@@ -50,18 +50,18 @@ public class IronWallManager {
         }*/
 
         for(int i = 0; i < 15; i++ ){
-            ironWalls.add(new IronWall(Constants.SCREEN_HEIGHT / 16, Constants.SCREEN_WIDTH/10, 0, i * Constants.SCREEN_HEIGHT / 15 ));
-            ironWalls.add(new IronWall(Constants.SCREEN_HEIGHT / 16, Constants.SCREEN_WIDTH/10, Constants.SCREEN_WIDTH/9 * 8, i * Constants.SCREEN_HEIGHT / 15 ));
+            ironWalls.add(new IronWall(Constants.SCREEN_HEIGHT / 16, Constants.SCREEN_WIDTH/10, 0, i * (Constants.SCREEN_HEIGHT / 15 )));
+            ironWalls.add(new IronWall(Constants.SCREEN_HEIGHT / 16, Constants.SCREEN_WIDTH/10, (Constants.SCREEN_WIDTH/9) * 8, i * (Constants.SCREEN_HEIGHT / 15) ));
             if(i%2 == 0){
-                ironWalls.add(new IronWall(Constants.SCREEN_HEIGHT / 16, Constants.SCREEN_WIDTH/10, Constants.SCREEN_WIDTH/9 * 2, i * Constants.SCREEN_HEIGHT / 15 ));
-                ironWalls.add(new IronWall(Constants.SCREEN_HEIGHT / 16, Constants.SCREEN_WIDTH/10, Constants.SCREEN_WIDTH/9 * 4, i * Constants.SCREEN_HEIGHT / 15 ));
-                ironWalls.add(new IronWall(Constants.SCREEN_HEIGHT / 16, Constants.SCREEN_WIDTH/10, Constants.SCREEN_WIDTH/9 * 6, i * Constants.SCREEN_HEIGHT / 15 ));
+                ironWalls.add(new IronWall(Constants.SCREEN_HEIGHT / 16, Constants.SCREEN_WIDTH/10, (Constants.SCREEN_WIDTH/9) * 2, i * (Constants.SCREEN_HEIGHT / 15)));
+                ironWalls.add(new IronWall(Constants.SCREEN_HEIGHT / 16, Constants.SCREEN_WIDTH/10, (Constants.SCREEN_WIDTH/9) * 4, i * (Constants.SCREEN_HEIGHT / 15)));
+                ironWalls.add(new IronWall(Constants.SCREEN_HEIGHT / 16, Constants.SCREEN_WIDTH/10, (Constants.SCREEN_WIDTH/9) * 6, i * (Constants.SCREEN_HEIGHT / 15)));
             }
             if(i == 0 || i == 14){
-                ironWalls.add(new IronWall(Constants.SCREEN_HEIGHT / 16, Constants.SCREEN_WIDTH/10, Constants.SCREEN_WIDTH/9 , i * Constants.SCREEN_HEIGHT / 15 ));
-                ironWalls.add(new IronWall(Constants.SCREEN_HEIGHT / 16, Constants.SCREEN_WIDTH/10, Constants.SCREEN_WIDTH/9 * 3, i * Constants.SCREEN_HEIGHT / 15 ));
-                ironWalls.add(new IronWall(Constants.SCREEN_HEIGHT / 16, Constants.SCREEN_WIDTH/10, Constants.SCREEN_WIDTH/9 * 5, i * Constants.SCREEN_HEIGHT / 15 ));
-                ironWalls.add(new IronWall(Constants.SCREEN_HEIGHT / 16, Constants.SCREEN_WIDTH/10, Constants.SCREEN_WIDTH/9 * 7, i * Constants.SCREEN_HEIGHT / 15 ));
+                ironWalls.add(new IronWall(Constants.SCREEN_HEIGHT / 16, Constants.SCREEN_WIDTH/10, (Constants.SCREEN_WIDTH/9 ), i * (Constants.SCREEN_HEIGHT / 15 )));
+                ironWalls.add(new IronWall(Constants.SCREEN_HEIGHT / 16, Constants.SCREEN_WIDTH/10, (Constants.SCREEN_WIDTH/9) * 3, i * (Constants.SCREEN_HEIGHT / 15 )));
+                ironWalls.add(new IronWall(Constants.SCREEN_HEIGHT / 16, Constants.SCREEN_WIDTH/10, (Constants.SCREEN_WIDTH/9 )* 5, i * (Constants.SCREEN_HEIGHT / 15 )));
+                ironWalls.add(new IronWall(Constants.SCREEN_HEIGHT / 16, Constants.SCREEN_WIDTH/10, (Constants.SCREEN_WIDTH/9) * 7, i * (Constants.SCREEN_HEIGHT / 15 )));
             }
         }
     }

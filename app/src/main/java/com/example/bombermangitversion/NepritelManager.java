@@ -12,6 +12,7 @@ public class NepritelManager {
     private int color;
 
     private long startTime;
+    private long elapsedTime;
     private long initTime;
 
     private int score = 0;
@@ -44,9 +45,9 @@ public class NepritelManager {
         }
 */
 
-        nepratele.add(new Nepritel(80,80,(Constants.SCREEN_WIDTH/9) *5 , 6 * (Constants.SCREEN_HEIGHT / 15), true));
-        nepratele.add(new Nepritel(80,80,(Constants.SCREEN_WIDTH/9) *7 , 13 * (Constants.SCREEN_HEIGHT / 15), false));
-        nepratele.add(new Nepritel(80,80,(Constants.SCREEN_WIDTH/9) * 1 , 13 * (Constants.SCREEN_HEIGHT / 15), true));
+        nepratele.add(new Nepritel(81,81,(Constants.SCREEN_WIDTH/9) *5 , 6 * (Constants.SCREEN_HEIGHT / 15), true));
+        nepratele.add(new Nepritel(81,81,(Constants.SCREEN_WIDTH/9) *7 , 13 * (Constants.SCREEN_HEIGHT / 15), false));
+        nepratele.add(new Nepritel(81,81,(Constants.SCREEN_WIDTH/9) * 1 , 13 * (Constants.SCREEN_HEIGHT / 15), true));
         Log.d("Enemy Added", "yiss");
     }
 
@@ -66,8 +67,10 @@ public class NepritelManager {
         }
 */
         int dt = (int)(System.currentTimeMillis() - startTime);
+
         Log.d("enemydt", ""+dt);
         for(Nepritel nepritel : nepratele) {
+            //pridat podminku aby ubehlo par chvil na zmenu direcke
             if(nepritel.direction){
                 nepritel.walkUp(dt);
             }

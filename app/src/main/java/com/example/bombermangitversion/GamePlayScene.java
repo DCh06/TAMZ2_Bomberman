@@ -20,6 +20,7 @@ public class GamePlayScene implements Scene {
     private IronWallManager ironWallManager;
     private BrickWallManager brickWallManager;
     private NepritelManager nepritelManager;
+    private BombManager bombManager;
     private boolean test = false;
     private Point lastPosition;
     private int direction = 0;
@@ -41,6 +42,8 @@ public class GamePlayScene implements Scene {
         ironWallManager = new IronWallManager(Color.BLACK);
         brickWallManager = new BrickWallManager(Color.RED);
         nepritelManager = new NepritelManager(Color.MAGENTA);
+        bombManager = new BombManager();
+
 
         //enemyManager = new EnemyManager(200, 350, 75, Color.BLACK);
     }
@@ -63,7 +66,7 @@ public class GamePlayScene implements Scene {
                 gameOverTime = System.currentTimeMillis();
             }*/
 
-            if (ironWallManager.playerCollide(bomberMan)||brickWallManager.playerCollide(bomberMan)) {
+            if (ironWallManager.playerCollide(bomberMan)||brickWallManager.playerCollide(bomberMan)|| bombManager.playerCollide(bomberMan)) {
                 //bomberMan.update();
                 if(direction==0) {
                     bomberMan.walkRight();//left 0, up 1 , right 2,  down 3
@@ -79,14 +82,15 @@ public class GamePlayScene implements Scene {
                 }
                 if(direction==3) {
                     bomberMan.walkUp();
-
                 }
-
                 bomberMan.stop();
             }
 
             brickWallManager.enemyCollide(nepritelManager.getNepratele());
             ironWallManager.enemyCollide(nepritelManager.getNepratele());
+            bombManager.enemyCollide(nepritelManager.getNepratele());
+
+            bombManager.update();
             nepritelManager.update();
             bomberMan.update();
 
@@ -103,6 +107,7 @@ public class GamePlayScene implements Scene {
         ironWallManager.draw(canvas);
         brickWallManager.draw(canvas);
         nepritelManager.draw(canvas);
+        bombManager.draw(canvas);
 
         if (gameOver) {
             Paint p = new Paint();
@@ -146,7 +151,11 @@ public class GamePlayScene implements Scene {
                     //if()
                 break;
             case MotionEvent.ACTION_MOVE:
-
+                bombManager.createBomb(Math.round(bomberMan.getCurrentPosition().x/(Constants.SCREEN_WIDTH/9))*(Constants.SCREEN_WIDTH/9),
+                        Math.round(bomberMan.getCurrentPosition().y/(Constants.SCREEN_HEIGHT/ 16))*(Constants.SCREEN_HEIGHT/16));
+                Log.d("created bomb at ", ""+ Math.round((float)bomberMan.getCurrentPosition().x/(float)Constants.SCREEN_WIDTH)*Constants.SCREEN_WIDTH+ " "+
+                        Math.round(bomberMan.getCurrentPosition().y/Constants.SCREEN_HEIGHT )*Constants.SCREEN_HEIGHT);
+                Log.d("bombermanx", ""+Math.round(bomberMan.getCurrentPosition().x/(Constants.SCREEN_WIDTH/9))*(Constants.SCREEN_WIDTH/8));
                 break;
             case MotionEvent.ACTION_UP:
                 bomberMan.stop();

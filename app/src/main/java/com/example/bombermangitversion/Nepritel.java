@@ -49,6 +49,7 @@ public class Nepritel implements GameObject {
 
     public void changeDirection() {
         direction = !direction;
+
     }
 
     @Override

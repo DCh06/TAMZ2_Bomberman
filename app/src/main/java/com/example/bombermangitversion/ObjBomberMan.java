@@ -90,8 +90,11 @@ public class ObjBomberMan implements GameObject {
         moveVector.set(0,0);
     }
 
-    @Override
+    public Point getCurrentPosition(){
+        return this.currentPosition;
+    }
 
+    @Override
     public void draw(Canvas canvas) {
         animationManager.draw(canvas, rectangle);
     }
