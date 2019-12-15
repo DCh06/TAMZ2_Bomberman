@@ -44,6 +44,10 @@ public class BrickWallManager {
         return false;
     }
 
+    public ArrayList<BrickWall> getBrickWalls(){
+        return this.brickWalls;
+    }
+
    public void enemyCollide(ArrayList<Nepritel> nepratele){
         for(BrickWall bw : brickWalls){
             for(Nepritel ne : nepratele)

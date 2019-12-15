@@ -27,6 +27,7 @@ public class GamePlayScene implements Scene {
     private int direction = 0;
     private int x;
     private int y;
+    private boolean end;
 
     /*private Bomb bomb;
     private BrickWalls brickWalls;*/
@@ -34,6 +35,7 @@ public class GamePlayScene implements Scene {
     private boolean movingPlayer = false;
     private boolean gameOver = false;
     private long gameOverTime;
+    private boolean gameVictory = false;
 
     public GamePlayScene() {
         bomberMan = new ObjBomberMan(new Rect(120, 120, 200, 200), Color.rgb(255, 0, 0));
@@ -45,17 +47,21 @@ public class GamePlayScene implements Scene {
         nepritelManager = new NepritelManager(Color.MAGENTA);
         explosionManager = new ExplosionManager();
         bombManager = new BombManager();
+        end = false;
+        gameVictory = false;
 
 
         //enemyManager = new EnemyManager(200, 350, 75, Color.BLACK);
     }
 
-    public void reset() {
+   /* public void reset() {
         playerCoords = new Point(Constants.SCREEN_WIDTH / 2, 3 * Constants.SCREEN_HEIGHT / 4);
         bomberMan.update();
         //enemyManager = new EnemyManager(200, 350, 75, Color.BLACK);
         movingPlayer = false;
     }
+    */
+    //TODO GAME OVeR SCREEN
 
     @Override
     public void update() {
@@ -93,10 +99,18 @@ public class GamePlayScene implements Scene {
                 bombManager.setExploded();
             }
 
+            explosionManager.playerCollide(bomberMan);
+            nepritelManager.playerCollide(bomberMan);
             brickWallManager.enemyCollide(nepritelManager.getNepratele());
             ironWallManager.enemyCollide(nepritelManager.getNepratele());
             bombManager.enemyCollide(nepritelManager.getNepratele());
             explosionManager.enemyCollide(nepritelManager.getNepratele());
+            explosionManager.wallCollide(brickWallManager.getBrickWalls());
+            if(!bomberMan.visible)
+                gameOver = true;
+            if(nepritelManager.getNepratele().size()<=0)
+                gameVictory = true;
+
             bombManager.update();
             explosionManager.update();
             nepritelManager.update();
@@ -120,10 +134,21 @@ public class GamePlayScene implements Scene {
 
 
         if (gameOver) {
-            Paint p = new Paint();
+            Paint p = new Paint(),d = new Paint();
             p.setTextSize(42f);
-            p.setColor(Color.RED);
-            canvas.drawText("Game Over", Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 2, p);
+            p.setColor(Color.WHITE);
+            d.setColor(Color.RED);
+            canvas.drawRect(new Rect(0,0, Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT), d);
+            canvas.drawText("Game Over", Constants.SCREEN_WIDTH / 2.5f, Constants.SCREEN_HEIGHT / 2, p);
+        }
+
+        if (gameVictory) {
+            Paint p = new Paint(),d = new Paint();
+            p.setTextSize(42f);
+            p.setColor(Color.WHITE);
+            d.setColor(Color.GREEN);
+            canvas.drawRect(new Rect(0,0, Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT), d);
+            canvas.drawText("YOU WON", Constants.SCREEN_WIDTH / 2.5f, Constants.SCREEN_HEIGHT / 2, p);
         }
     }
 
@@ -158,7 +183,8 @@ public class GamePlayScene implements Scene {
                     bomberMan.walkRight();
                     direction = 2;
                 }
-                    //if()
+
+
                 break;
             case MotionEvent.ACTION_MOVE:
                 bombManager.createBomb(Math.round(bomberMan.getCurrentPosition().x/(Constants.SCREEN_WIDTH/9))*(Constants.SCREEN_WIDTH/9),

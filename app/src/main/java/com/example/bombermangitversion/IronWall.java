@@ -1,5 +1,7 @@
 package com.example.bombermangitversion;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -9,11 +11,15 @@ public class IronWall implements GameObject {
 
     private Rect rectangle;
     private int color;
+    BitmapFactory bf;
+    Bitmap spriteSheet;
 
 
     public IronWall(int rectHeight, int rectWidth, int startX, int startY){
         this.color = Color.BLACK;
         rectangle = new Rect(startX, startY, startX + rectWidth, startY + rectHeight);
+        bf = new BitmapFactory();
+        spriteSheet = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(),R.drawable.brick_wall_sunny);
     }
 
 
@@ -37,7 +43,7 @@ public class IronWall implements GameObject {
     public void draw(Canvas canvas) {
         Paint paint = new Paint();
         paint.setColor(color);
-        canvas.drawRect(this.rectangle, paint);
+        canvas.drawBitmap(spriteSheet, null, rectangle, null);
     }
 
     @Override

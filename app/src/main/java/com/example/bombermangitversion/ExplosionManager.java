@@ -19,13 +19,6 @@ public class ExplosionManager {
         visible = false;
     }
 
-    public boolean playerCollide(ObjBomberMan bomberMan){
-        for(ObjExplosion ex:explosion){
-            if(ex.playerCollide(bomberMan))
-                return true;
-        }
-        return false;
-    }
     public void setExploded(){
         exploded = false;
     }
@@ -35,6 +28,24 @@ public class ExplosionManager {
             for (Nepritel ne : nepratele) {
                 if (ex.enemyCollide(ne)) {
                     ne.visible = false;
+                }
+            }
+        }
+    }
+
+    public void playerCollide(ObjBomberMan bomberMan){
+        for (ObjExplosion ex : explosion) {
+                if (ex.playerCollide(bomberMan)) {
+                    bomberMan.visible = false;
+                }
+        }
+    }
+
+    public void wallCollide(ArrayList<BrickWall> walls){
+        for (ObjExplosion ex : explosion) {
+            for (BrickWall bw : walls) {
+                if (ex.wallCollide(bw)) {
+                    bw.visible = false;
                 }
             }
         }
@@ -58,7 +69,7 @@ public class ExplosionManager {
     }
 
     public void update(){
-        if(System.currentTimeMillis() - startTime > 2000){
+        if(System.currentTimeMillis() - startTime > 1000){
             /* bombs.get(0).visible = false;*/
             for(ObjExplosion ex : explosion){
 

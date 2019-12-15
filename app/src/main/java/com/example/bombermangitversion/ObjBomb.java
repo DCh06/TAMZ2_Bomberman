@@ -1,5 +1,7 @@
 package com.example.bombermangitversion;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -13,6 +15,11 @@ public class ObjBomb implements GameObject{
     public boolean visible;
     public boolean justPlanted;
     private Point bomblocation;
+    private int width;
+    private int height;
+
+    private Animation bombAnimation;
+    private  AnimationManager animationManager;
 
 
 
@@ -22,8 +29,14 @@ public class ObjBomb implements GameObject{
         visible = true;
         justPlanted = true;
         bomblocation= new Point(startX, startY);
+        BitmapFactory bf = new BitmapFactory();
+        Bitmap spriteSheet = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(),R.drawable.bomb_8);
+        this.width = spriteSheet.getWidth() / 4;
+        this.height = spriteSheet.getHeight() / 4;
+        bombAnimation = new Animation(spriteSheet, 3, height, width, 3);
+        animationManager = new AnimationManager(new Animation[]{ bombAnimation});
+        animationManager.playAnim(0);
     }
-
 
     public Rect getRectangle(){
         return rectangle;
@@ -53,13 +66,14 @@ public class ObjBomb implements GameObject{
 
     @Override
     public void draw(Canvas canvas) {
-        Paint paint = new Paint();
+        /*Paint paint = new Paint();
         paint.setColor(color);
-        canvas.drawRect(this.rectangle, paint);
+        canvas.drawRect(this.rectangle, paint);*/
+        if(visible)animationManager.draw(canvas, rectangle);
     }
 
     @Override
     public void update() {
-
+            animationManager.update();
     }
 }

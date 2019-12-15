@@ -26,13 +26,12 @@ public class NepritelManager {
         populateEnemies();
     }
 
-    public boolean playerCollide(ObjBomberMan bomberMan){
+    public void playerCollide(ObjBomberMan bomberMan){
         for(Nepritel nepritel : nepratele){
             if(nepritel.playerCollide(bomberMan)){
-                return true;
+                bomberMan.visible = false;
             }
         }
-        return false;
     }
 
     private void populateEnemies() {
@@ -76,8 +75,11 @@ public class NepritelManager {
             }
             else
                 nepritel.walkDown(dt);
+
+            nepritel.update();
         }
         startTime = System.currentTimeMillis();
+
     }
 
     public ArrayList<Nepritel> getNepratele(){

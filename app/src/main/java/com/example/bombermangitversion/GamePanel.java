@@ -1,6 +1,7 @@
 package com.example.bombermangitversion;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -25,7 +26,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         Constants.CURRENT_CONTEXT = context;
         thread = new MainThread(getHolder(), this);
-
         manager = new SceneManager();
 
         setFocusable(true);

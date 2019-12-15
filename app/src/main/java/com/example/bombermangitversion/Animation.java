@@ -50,7 +50,6 @@ public class Animation {
         canvas.drawBitmap(spriteSheet, source, destination, null);
     }
 
-
     public void update(){
         if(!isPlaying)
             return;

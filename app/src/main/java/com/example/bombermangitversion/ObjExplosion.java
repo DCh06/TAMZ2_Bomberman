@@ -46,6 +46,10 @@ public class ObjExplosion implements GameObject {
         return copy.intersect(nepritel.getRectangle());
     }
 
+    public boolean wallCollide(BrickWall brickWall){
+        Rect copy = new Rect(this.rectangle);
+        return copy.intersect(brickWall.getRectangle());
+    }
 
     @Override
     public void draw(Canvas canvas) {

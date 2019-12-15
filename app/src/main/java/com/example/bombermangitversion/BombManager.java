@@ -57,16 +57,20 @@ public class BombManager {
         }
     }
 
-    public void update(){
-        if(System.currentTimeMillis() - startTime > 3000 && bombs.size() > 0){
+    public void update() {
+        /*if(System.currentTimeMillis() - startTime > 3000 && bombs.size() > 0){
            /* bombs.get(0).visible = false;*/
-            for(ObjBomb bb : bombs){
-
+        for (ObjBomb bb : bombs) {
+            if (System.currentTimeMillis() - startTime > 3000 && bombs.size() > 0) {
                 bb.visible = false;
                 exploded = true;
             }
+            bb.update();
         }
     }
+        //}
+
+
 
    /* public void exploded(Explosion explosion){
         return true;

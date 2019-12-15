@@ -15,6 +15,7 @@ public class ObjBomberMan implements GameObject {
     private Point currentPosition;
     private Point moveVector;
     private float speed;
+    public boolean visible;
 
     private long startTime;
     private long initTime;
@@ -50,6 +51,7 @@ public class ObjBomberMan implements GameObject {
 
         animationManager = new AnimationManager(new Animation[]{idle, walkDown, walkUp, walkLeft, walkRight});
         animationManager.playAnim(0);
+        visible = true;
     }
 
     public void walkUp() {
@@ -96,7 +98,7 @@ public class ObjBomberMan implements GameObject {
 
     @Override
     public void draw(Canvas canvas) {
-        animationManager.draw(canvas, rectangle);
+        if(visible)animationManager.draw(canvas, rectangle);
     }
 
     //   @Override
