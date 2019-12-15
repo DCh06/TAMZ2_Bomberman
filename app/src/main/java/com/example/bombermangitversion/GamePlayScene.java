@@ -1,5 +1,7 @@
 package com.example.bombermangitversion;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -28,6 +30,8 @@ public class GamePlayScene implements Scene {
     private int x;
     private int y;
     private boolean end;
+    BitmapFactory bf;
+    Bitmap spriteSheet;
 
     /*private Bomb bomb;
     private BrickWalls brickWalls;*/
@@ -49,6 +53,8 @@ public class GamePlayScene implements Scene {
         bombManager = new BombManager();
         end = false;
         gameVictory = false;
+        bf = new BitmapFactory();
+        spriteSheet = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(),R.drawable.grass_16);
 
 
         //enemyManager = new EnemyManager(200, 350, 75, Color.BLACK);
@@ -122,7 +128,7 @@ public class GamePlayScene implements Scene {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawColor(Color.WHITE);
+        canvas.drawBitmap(spriteSheet, null, new Rect(0,0,Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT), null);
 
         bomberMan.draw(canvas);
         //enemyManager.draw(canvas);

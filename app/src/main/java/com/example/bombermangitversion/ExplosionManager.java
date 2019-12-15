@@ -68,16 +68,18 @@ public class ExplosionManager {
         }
     }
 
-    public void update(){
-        if(System.currentTimeMillis() - startTime > 1000){
-            /* bombs.get(0).visible = false;*/
-            for(ObjExplosion ex : explosion){
+    public void update() {
 
+        /* bombs.get(0).visible = false;*/
+        for (ObjExplosion ex : explosion) {
+            if (System.currentTimeMillis() - startTime > 1000) {
                 ex.visible = false;
+                exploded = false;
             }
-            exploded = false;
+            ex.update();
         }
     }
+
 
     /* public void exploded(Explosion explosion){
          return true;

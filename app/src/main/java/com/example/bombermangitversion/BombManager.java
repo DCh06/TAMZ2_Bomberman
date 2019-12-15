@@ -61,7 +61,7 @@ public class BombManager {
         /*if(System.currentTimeMillis() - startTime > 3000 && bombs.size() > 0){
            /* bombs.get(0).visible = false;*/
         for (ObjBomb bb : bombs) {
-            if (System.currentTimeMillis() - startTime > 3000 && bombs.size() > 0) {
+            if (System.currentTimeMillis() - startTime > 3500 && bombs.size() > 0) {
                 bb.visible = false;
                 exploded = true;
             }

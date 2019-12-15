@@ -32,7 +32,7 @@ public class ObjBomberMan implements GameObject {
 
         this.rectangle = rectangle;
         this.color = color;
-        this.speed =  0.5f;
+        this.speed =  0.3f;
         BitmapFactory bf = new BitmapFactory();
         Bitmap spriteSheet = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(),R.drawable.ned);
         this.width = spriteSheet.getWidth() / 4;
@@ -49,7 +49,7 @@ public class ObjBomberMan implements GameObject {
         walkLeft = new Animation(spriteSheet, 3, height, width, 1);
         walkRight = new Animation(spriteSheet, 3, height, width, 3);
 
-        animationManager = new AnimationManager(new Animation[]{idle, walkDown, walkUp, walkLeft, walkRight});
+        animationManager = new AnimationManager(new Animation[]{idle,  walkUp ,walkDown, walkLeft, walkRight});
         animationManager.playAnim(0);
         visible = true;
     }
